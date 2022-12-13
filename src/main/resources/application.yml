@@ -1,0 +1,82 @@
+server:
+  #tomcat配置信息
+  tomcat:
+    uri-encoding: UTF-8
+    threads:
+      max: 200
+      min-spare: 30
+    connection-timeout: 5000ms
+  port: 8080
+  servlet:
+    context-path: /onlineoffice-wx-api
+
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  #Mysql配置信息
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/onlineoffice?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password: root
+      initial-size: 8
+      max-active: 16
+      min-idle: 8
+      max-wait: 60000
+      test-while-idle: true
+      test-on-borrow: false
+      test-on-return: false
+
+  #Redis配置信息
+  redis:
+    database: 0
+    host: localhost
+    port: 6379
+    password: abc123456
+    jedis:
+      pool:
+        max-active: 1000
+        max-wait: -1ms
+        max-idle: 16
+        min-idle: 8
+
+  #mongodb配置信息
+  data:
+    mongodb:
+      host: localhost
+      port: 27017
+      database: onlineoffice
+      authentication-database: admin
+      username: admin
+      password: abc123456
+
+mybatis:
+  mapper-locations: classpath*:mapper/*.xml
+  type-aliases-package: com.cch.onlineoffice.wx.db.pojo
+  configuration:
+    #      控制台输出sql语句
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    #      使用驼峰命名
+    map-underscore-to-camel-case: true
+
+logging:
+  level:
+    root: info
+    com.cch.onlineoffice.wx.db.dao: warn
+  pattern:
+    console: "%d{HH:mm:ss}  %-5level  %msg%n"
+
+onlineoffice:
+  jwt:
+    #密钥
+    secret: abc123456
+    #令牌过期时间（天）
+    expire:  5
+    #令牌缓存时间（天数）
+    cache-expire: 10
+
+
+
