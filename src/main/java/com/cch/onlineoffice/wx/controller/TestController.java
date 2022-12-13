@@ -22,4 +22,10 @@ public class TestController {
     public R sayHello(  @RequestBody TestSayHelloForm form){
         return R.ok().put("data","Hello,"+form.getName());
     }
+
+    @PostMapping("/sayHello")
+    @ApiOperation("最简单的测试方法")
+    public R sayHellodev(  @RequestBody TestSayHelloForm form){
+        return R.ok().put("data","Hello,"+form.getName());
+    }
 }
